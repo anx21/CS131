@@ -1,0 +1,35 @@
+In my implementation, I made frequent use of match function to pattern match 
+the input with particular cases. In my subset function, I recursively compared 
+the head of the first list against the head of the second list. Once the head 
+of the first list is compared against the entire second list, it moves onto the
+subsequent element (next head on the subsequent recursive call). My proper
+subset uses subset in that "a" is a proper subset of "b" iff "a" is a subset
+of "b" and "b" is not a subset of "a". Similar, equal set is if "a" and "b"
+are subsets of each other. In set diff, I used subset to either append the
+particular element or not, depending on if subset returns true or false.
+
+In computed fixed point, if the equality predicate is true, the function has
+reached the fixed point and returns the value. Otherwise, the recursive
+input is the output of the function with respect to the current input.
+
+In computed periodic point, in my logical-if split, I decremented the period 
+until it has reached 0 to calculate the potential periodic point. If the
+equality predicate is true, the function has reached the periodic point
+and returns the value. Otherwise, recurse with the input as the function of
+the current input.
+
+In my blind alley filter, my approach is to find a list of terminal 
+symbol. However, because of the order of traversal and the interdependencies
+of symbols, I used the computed fixed point with the equal rule sets (variant
+of the equal sets) as the predicate. With the complete list of terminal
+symbols, I can check each rule to see whether it is a blind alley or not.
+
+The trickest part is making sure that the function types match. The problem
+is amplified in recursive functions because the output of the function
+needs to match the input. I wrote a few helper functions to eliminate the
+mismatch function types. I incrementally built my filter in a bottom-up 
+approach by debugging/making sure a helper function returns the correct
+type before moving on. Initially, I was using "match .. with" but replaced it
+with "function to make the function less verbose. 
+
+My implementation passes all the sample test cases provided in the specification.
