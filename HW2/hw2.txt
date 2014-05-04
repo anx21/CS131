@@ -1,0 +1,53 @@
+The homework 2 grammar style initially threw me off, especially list of rules that 
+is implemented as a the curried function in the second element of the grammar tuple. 
+In my original implemented, I returned the rules as a list of list of rules for each 
+nonterminal symbol. Once I realized that it should return a function instead, it was
+a minor tweak to convert_grammar to call a helper function that creates the list of
+rules matching the input nonterminal symbol. The converted grammar has the same type
+as awkish_grammar. My test cases finds the rules matching specified nonterminals in
+the converted grammar and matches the results from the awkish_grammar.
+
+In implementing the parser, I looked at the hint code as suggested but found it rather 
+difficult to understand and trying to adapt the solution to the current problem made 
+it more difficult. I took the approach that was discussed by the TA and created two 
+functions: one that implements an AND matcher and another that implements an OR matcher.
+The parse_filter function calls the match_or function with input parameters: start symbol,
+complete list of rules, list of rules for given start symbol, acceptor, derivation which
+is initially an empty list, and the fragment. The match_or function goes through the list
+of rules and picks the first one and tries to match it with the fragment by calling 
+the match_and function. The match_and function tries to completely match the a particular
+with the fragment. When the rule has been matched, it calls the acceptor with the derivation
+and suffix/unmatched fragment. Otherwise, it will try to match the head of the rule with
+the head of the fragment. If the head of the rule is a terminal symbol and is a match with
+the head of the fragment, it recursively matches the tails. If it's not a match, it returns
+None. On the other hand, if the head of the rule is a non-terminal, it will start a recursive
+stack by calling match_or with the encountered non-terminal symbol as the start symbol. Each
+call to match_or can be seen as a new layer in the parse tree. The branch ends when it
+reaches a terminal symbol.
+
+The algorithm so far is relatively straight-forward. It is a DFS of the grammar rules with
+the start symbol as the root to find an acceptable match. The crucial and difficult part 
+is the acceptor. In my initial approach, I was passing the same, high-level acceptor in each
+recursive call. The acceptor gets executed when a given rule has been fully matched. However, 
+in examining the parse tree, the acceptor behavior was incorrect. When the acceptor returns a
+match, the value is returned all the way up to the top of the recursive stack. This disregards
+whether the rule at each level between the root and the leaf is acceptable or not. As hinted 
+in discussion, there should be a separate acceptor that is different than the initial one 
+passed into parse_filter. This internal acceptor should check that each encountered rule in 
+the recursion is current. Similar, the professor discussed in lecture that there should be 
+more than one acceptor and that the acceptor should be modified and passed in to the subsequent 
+level’s matcher. 
+
+With this new approach, when the match_and encounter a non-terminal symbol, it performs the 
+same recurive call as mentioned above but the acceptor is now a curried function to match_and 
+with the tail of the current rule. Therefore, on each non-terminal recursive, the acceptor 
+function grows. When the function reaches the base case, it will process the nested curried 
+function of acceptors. Therefore, in order for a rule to be completedly satisfied, it must pass 
+each acceptor function with the derivation and suffix at each particular level. In other words,
+the matched head and tail must satisified.
+
+The parser has a few shortcomings. The parser expects the grammar to be left associative and
+if not, it is possible to be stuck in an infinite loop. For example, if Expr has a rule that 
+is Expr;Binop;Term (reverse of the first rule), it will first try to match Expr, which is an 
+non-terminal and recursively call match_or. It will encounter the same scenario in the recursive 
+call and be stuck in an infinite loop.
