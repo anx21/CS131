@@ -1,7 +1,7 @@
 CS131
 =====
 
-Programming Languages, Fall '14
+Programming Languages, Fall '14<br/>
 Course website: http://www.cs.ucla.edu/classes/spring14/cs131/
 
 ####HW1: Grammar Filter (OCaml)
@@ -18,3 +18,9 @@ Modify a simple, multi-threaded computational benchmark with different performan
 
 ####HW5: Continuation-based Fragment Analyzer (Scheme)
 Write a procedure that returns a match for an input fragment and pattern. The procedure makes use of call-with-current-continuation to iterate through all suitable matches.
+
+####HW6: Containerization Support Languages
+Determine the feasibility of re-implementing Docker, currently in Go, using Java, Python, and Dart. 
+
+####Project: Twisted Places Proxy Herd
+Implement an application server herd using Twisted framework. Servers handles client updates and performs Google Places API calls upon request. Client updates are exchanged between servers using flooding algorithm.
