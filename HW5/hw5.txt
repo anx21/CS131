@@ -1,0 +1,24 @@
+Starting with the hint solution, I removed all instances of the acceptor and
+replaced the invocation of the acceptor function with continuation. In general,
+when a match is found, the continuation would exit, returning the current match
+and backtracker. When the backtracker is invoked, the program jumps back into
+previously exited state and continues with the execution. In my implementation, 
+I made use of returning #false when jumping back in, which causes either the
+subsequent statement in an 'or' block to get executed or cause an 'and' block to
+fail and continue on. As a result, the program will continue and find the next 
+acceptable match. Because the pattern could be nested/multiple levels deep, 
+the tricky part was to make sure that the correct backtracker gets passed/invoked. 
+It is important to continue with where the program previously left off, otherwise, 
+certain matches will be ommited or not be found. For example, in my 'make-list', I
+check that the 'head-matcher' is good. If it is, I proceed to call 'tail-matcher', 
+otherwise, I return false. If the 'tail-matcher' is good, I returned what 'tail-
+matcher' returned, otherwise, I would backtrack by calling the continatuion from
+'head-matcher'. I found the debug mode in DrRacket to be very helpful in tracing 
+through the code and checking the logic. A similar approach would be create an 
+'accept' function that has the continuation in it and leave the hint code as is. 
+A new 'make-matcher' will take in a single argument and call the hint 'make-matcher' 
+with the newly created 'accept' function as the acceptor. With this approach, 
+there is no need to replace all the 'accept' instances with the hint code. 
+Even though this approach is simpler, I wasn't sure if it was the intent of this 
+assignment because my former approach requires more extensive usage and thus 
+understanding of continuation. 
