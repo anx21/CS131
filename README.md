@@ -22,5 +22,5 @@ Write a procedure that returns a match for an input fragment and pattern. The pr
 ####HW6: Containerization Support Languages
 Determine the feasibility of re-implementing Docker, currently in Go, using Java, Python, and Dart. 
 
-####Project: Twisted Places Proxy Herd
+####Project: Twisted Places Proxy Herd (Python)
 Implement an application server herd using Twisted framework. Servers handles client updates and performs Google Places API calls upon request. Client updates are exchanged between servers using flooding algorithm.
