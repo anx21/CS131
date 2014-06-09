@@ -2,6 +2,7 @@ CS131
 =====
 
 Programming Languages, Fall '14
+Course website: http://www.cs.ucla.edu/classes/spring14/cs131/
 
 ####HW1: Grammar Filter (OCaml)
 Write a function filter_blind_alleys g that returns a copy of the grammar g with all blind-alley rules removed. This function should preserve the order of rules: that is, all rules that are returned should be in the same order as the rules in g.
@@ -12,4 +13,8 @@ Write a function parse_prefix gram that returns a matcher for the grammar gram. 
 ####HW3: KenKen Solver (Prolog)
 Write a predicate kenken/3 that makes use of finite domain solver and another plain_kenken/3 that does not to solver a KenKen puzzle.
 
-####HW4
+####HW4: Java Shared Memory Performance Races (Java)
+Modify a simple, multi-threaded computational benchmark with different performance and reliability tradeoffs under the JMM.
+
+####HW5: Continuation-based Fragment Analyzer (Scheme)
+Write a procedure that returns a match for an input fragment and pattern. The procedure makes use of call-with-current-continuation to iterate through all suitable matches.
