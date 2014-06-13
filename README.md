@@ -4,6 +4,9 @@ CS131
 Programming Languages, Fall '14<br/>
 Course website: http://www.cs.ucla.edu/classes/spring14/cs131/
 
+####Project: Twisted Places Proxy Herd (Python)
+Implement an application server herd using Twisted framework. Servers handles client updates and performs Google Places API calls upon request. Client updates are exchanged between servers using simple flooding algorithm.
+
 ####HW1: Grammar Filter (OCaml)
 Write a function filter_blind_alleys g that returns a copy of the grammar g with all blind-alley rules removed. This function should preserve the order of rules: that is, all rules that are returned should be in the same order as the rules in g.
 
@@ -21,6 +24,3 @@ Write a procedure that returns a match for an input fragment and pattern. The pr
 
 ####HW6: Containerization Support Languages
 Determine the feasibility of re-implementing Docker, currently in Go, using Java, Python, and Dart. 
-
-####Project: Twisted Places Proxy Herd (Python)
-Implement an application server herd using Twisted framework. Servers handles client updates and performs Google Places API calls upon request. Client updates are exchanged between servers using flooding algorithm.
